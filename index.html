@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>서울 국악 동아리 연합</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body data-page="home">
+  <header class="topbar">
+    <div class="wrap nav">
+      <a class="brand" href="index.html">서울 국악 동아리 연합</a>
+      <nav aria-label="주요 메뉴">
+        <ul class="nav-links"><li><a class="nav-link" href="about.html">소개</a></li><li><a class="nav-link" href="clubs.html">참여 동아리</a></li><li><a class="nav-link" href="parts.html">파트</a></li></ul>
+      </nav>
+      <button class="primary-btn" data-open-modal="contact"><span class="material-symbols-outlined">mail</span>Contact</button>
+      <button class="icon-btn mobile-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false"><span class="material-symbols-outlined">menu</span></button>
+    </div>
+    <div class="mobile-panel" id="mobilePanel">
+      <a class="nav-link" href="about.html">소개</a><a class="nav-link" href="clubs.html">참여 동아리</a><a class="nav-link" href="parts.html">파트</a>
+      <button class="primary-btn" data-open-modal="contact"><span class="material-symbols-outlined">mail</span>Contact</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero wrap" id="home" data-section="home">
+      <div>
+        <div class="logo-ring" aria-hidden="true"><div class="logo-mark"><img src="./src/sgu_logo.png" alt=""></div></div>
+        <h1>서울 국악 동아리 연합</h1>
+        <p class="lead">서울의 대학 국악 동아리들이 함께 전통음악의 유산을 보존하고, 오늘의 무대 위에서 새롭게 울립니다.</p>
+        <div class="hero-actions">
+          <a class="social-btn" href="https://youtube.com/@ginue_punglyuhoe" target="_blank" rel="noopener"><span class="material-symbols-outlined">smart_display</span>YouTube</a>
+          <a class="social-btn" href="https://instagram.com/ginue_punglyuhoe" target="_blank" rel="noopener"><span class="material-symbols-outlined">photo_camera</span>Instagram</a>
+          <button class="social-btn" data-link="clubs.html"><span class="material-symbols-outlined">groups</span>동아리 보기</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="band paper-band" aria-labelledby="newsTitle">
+      <div class="wrap">
+        <div class="section-head"><h2 id="newsTitle">주요 소식</h2></div>
+        <div class="grid-3">
+          <button class="card news-card" data-news="concert">
+            <span class="material-symbols-outlined">event</span>
+            <h3>정기 공연 안내</h3>
+            <p>2026년 여름 정기 공연의 일정, 장소, 예매 정보를 확인합니다.</p>
+          </button>
+          <button class="card news-card" data-news="join">
+            <span class="material-symbols-outlined">group_add</span>
+            <h3>신규 동아리 모집</h3>
+            <p>서울 국악 동아리 연합과 함께할 대학 동아리 신청 절차를 안내합니다.</p>
+          </button>
+          <button class="card news-card" data-news="archive">
+            <span class="material-symbols-outlined">library_music</span>
+            <h3>국악 아카이브</h3>
+            <p>연합 공연 기록, 악기별 자료, 연습 레퍼런스를 모아 제공합니다.</p>
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <div>
+        <div class="brand">서울 국악 동아리 연합</div>
+        <p class="copyright">© 2026 Seoul Gugak Union. Preserving the heritage of Korean Traditional Music.</p>
+      </div>
+      <nav class="footer-links" aria-label="푸터 메뉴">
+        <a href="https://instagram.com/ginue_punglyuhoe" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://youtube.com/@ginue_punglyuhoe" target="_blank" rel="noopener">YouTube</a>
+        <button class="nav-link" data-open-modal="contact">Contact Us</button>
+        <button class="nav-link" data-open-modal="privacy">Privacy Policy</button>
+      </nav>
+    </div>
+  </footer>
+
+  <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal">
+      <div class="modal-head">
+        <h2 id="modalTitle">문의</h2>
+        <button class="icon-btn" type="button" id="modalClose" aria-label="팝업 닫기"><span class="material-symbols-outlined">close</span></button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="./app.js"></script>
+</body>
+</html>

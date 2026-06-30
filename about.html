@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>소개 - 서울 국악 동아리 연합</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body data-page="about">
+  <header class="topbar">
+    <div class="wrap nav">
+      <a class="brand" href="index.html">서울 국악 동아리 연합</a>
+      <nav aria-label="주요 메뉴">
+        <ul class="nav-links"><li><a class="nav-link" href="about.html" aria-current="page">소개</a></li><li><a class="nav-link" href="clubs.html">참여 동아리</a></li><li><a class="nav-link" href="parts.html">파트</a></li></ul>
+      </nav>
+      <button class="primary-btn" data-open-modal="contact"><span class="material-symbols-outlined">mail</span>Contact</button>
+      <button class="icon-btn mobile-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false"><span class="material-symbols-outlined">menu</span></button>
+    </div>
+    <div class="mobile-panel" id="mobilePanel">
+      <a class="nav-link" href="about.html" aria-current="page">소개</a><a class="nav-link" href="clubs.html">참여 동아리</a><a class="nav-link" href="parts.html">파트</a>
+      <button class="primary-btn" data-open-modal="contact"><span class="material-symbols-outlined">mail</span>Contact</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="band" id="about" data-section="about">
+      <div class="wrap split">
+        <div class="bio">
+          <span class="eyebrow">Breathing Tradition</span>
+          <h2>전통의 울림,<br>현대의 공명</h2>
+          <p>서울 국악 동아리 연합은 각 대학에서 전통음악을 연마하는 청년 연주자들의 네트워크입니다. 정기 합주와 공연, 자료 공유, 신입 교육을 통해 국악의 문턱을 낮추고 깊이는 지킵니다.</p>
+          <p>동아리마다 다른 악기와 레퍼토리를 존중하면서도, 함께 무대에 설 수 있는 공통의 기준과 협업 방식을 만들어갑니다.</p>
+        </div>
+        <div class="image-panel" role="img" aria-label="전통 국악기가 놓인 따뜻한 분위기의 공간"></div>
+      </div>
+    </section>
+
+    <section class="band paper-band">
+      <div class="wrap split">
+        <div class="conductor-photo">
+          <img src="./src/Conductor.jpeg" alt="지휘자 장태평">
+        </div>
+        <div class="bio conductor-bio">
+          <span class="eyebrow">지휘자 소개</span>
+          <h3>장태평</h3>
+          <p class="role">작곡가, 지휘자</p>
+          <p>
+            - 국립국악원 창작악단 &lt;청춘, 청어람&gt; 신진 지휘자 선정<br>
+            - 제11회 ARKO한국창작음악제 국악부문 선정<br>
+            - 국악관현악 '춤꽃', '처용', 가야금협주곡 '달꽃', '바리'<br>
+            - 서울시극단 '퉁소소리', 창작연희극 '로미오&amp;줄리엣'<br>
+            - 경기시나위오케스트라 부지휘자 역임<br>
+            - 現) 한국예술종합학교 전통예술원 출강
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="band">
+      <div class="wrap split reverse">
+        <div class="bio">
+          <span class="eyebrow">연합 대표 소개</span>
+          <h2>전통의 가치를<br>새로운 무대로 연결하는 다리</h2>
+          <h3>김도현 대표</h3>
+          <p>대학 국악 동아리 간 교류를 확대하고, 공연 기획과 운영 자료를 투명하게 공유하는 일을 맡고 있습니다.</p>
+          <p>신입 단원 모집, 연습 공간 협의, 합동 공연 운영처럼 현장에서 필요한 문제를 실제 절차로 풀어내는 것이 대표단의 핵심 역할입니다.</p>
+        </div>
+        <div class="portrait" data-name="대표"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <div>
+        <div class="brand">서울 국악 동아리 연합</div>
+        <p class="copyright">© 2026 Seoul Gugak Union. Preserving the heritage of Korean Traditional Music.</p>
+      </div>
+      <nav class="footer-links" aria-label="푸터 메뉴">
+        <a href="https://instagram.com/ginue_punglyuhoe" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://youtube.com/@ginue_punglyuhoe" target="_blank" rel="noopener">YouTube</a>
+        <button class="nav-link" data-open-modal="contact">Contact Us</button>
+        <button class="nav-link" data-open-modal="privacy">Privacy Policy</button>
+      </nav>
+    </div>
+  </footer>
+
+  <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal">
+      <div class="modal-head">
+        <h2 id="modalTitle">문의</h2>
+        <button class="icon-btn" type="button" id="modalClose" aria-label="팝업 닫기"><span class="material-symbols-outlined">close</span></button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="./app.js"></script>
+</body>
+</html>
