@@ -1,12 +1,15 @@
+const rootPath = window.location.pathname.includes("/pages/") ? "../" : "./";
+const imagePath = (fileName) => `${rootPath}assets/img/${fileName}`;
+
 const clubs = [
-      { name: "경인교육대학교 풍류회", school: "경인교육대학교", logo: "./src/ginue_logo.png", isNew: true, instagram: "https://instagram.com/ginue_punglyuhoe", youtube: "https://youtube.com/@ginue_punglyuhoe" },
-      { name: "고려대학교 국악연구회", school: "고려대학교", logo: "./src/korea_logo.png", isNew: false, instagram: "https://www.instagram.com/kukookyeon/", youtube: "https://www.youtube.com/@%EA%B3%A0%EB%A0%A4%EB%8C%80%ED%95%99%EA%B5%90%EA%B5%AD%EC%95%85%EC%97%B0%EA%B5%AC%ED%9A%8C" },
-      { name: "서울대학교 여민락", school: "서울대학교", logo: "./src/snu_logo.png", isNew: true, instagram: "https://instagram.com/snu_yeominrak", youtube: "https://youtube.com/@서울대학교국악동아리" },
-      { name: "성균관대학교 대동악회 다스름", school: "성균관대학교", logo: "./src/skku_logo.png", isNew: false, instagram: "https://www.instagram.com/skku_gugak/", youtube: "https://www.youtube.com/@skku_gugak" },
-      { name: "숭실대학교 젓대잽이", school: "숭실대학교", logo: "./src/ssu_logo.png", isNew: true, instagram: "https://instagram.com/ssu_jdje", youtube: "https://youtube.com/@ssu_jdje" },
-      { name: "연세대학교 연세국악연구회", school: "연세대학교", logo: "./src/yonsei_logo.png", isNew: false, instagram: "https://www.instagram.com/gugak_yonguk/", youtube: "https://www.youtube.com/@yonsei_gugak" },
-      { name: "이화여자대학교 닐리리화", school: "이화여자대학교", logo: "./src/ewha_logo_wo_bg.png", isNew: false, instagram: "https://www.instagram.com/lilyewha_official/", youtube: "https://www.youtube.com/@lilyewha7017" },
-      { name: "한국외국어대학교 얼소리", school: "한국외국어대학교", logo: "./src/hufs_logo_wo_bg.png", isNew: true, instagram: "https://instagram.com/hufs_eolsori", youtube: "https://youtube.com/@한국외대얼소리" }
+      { name: "경인교육대학교 풍류회", school: "경인교육대학교", logo: imagePath("ginue_logo.png"), isNew: true, instagram: "https://instagram.com/ginue_punglyuhoe", youtube: "https://youtube.com/@ginue_punglyuhoe" },
+      { name: "고려대학교 국악연구회", school: "고려대학교", logo: imagePath("korea_logo.png"), isNew: false, instagram: "https://www.instagram.com/kukookyeon/", youtube: "https://www.youtube.com/@%EA%B3%A0%EB%A0%A4%EB%8C%80%ED%95%99%EA%B5%90%EA%B5%AD%EC%95%85%EC%97%B0%EA%B5%AC%ED%9A%8C" },
+      { name: "서울대학교 여민락", school: "서울대학교", logo: imagePath("snu_logo.png"), isNew: true, instagram: "https://instagram.com/snu_yeominrak", youtube: "https://youtube.com/@서울대학교국악동아리" },
+      { name: "성균관대학교 대동악회 다스름", school: "성균관대학교", logo: imagePath("skku_logo.png"), isNew: false, instagram: "https://www.instagram.com/skku_gugak/", youtube: "https://www.youtube.com/@skku_gugak" },
+      { name: "숭실대학교 젓대잽이", school: "숭실대학교", logo: imagePath("ssu_logo.png"), isNew: true, instagram: "https://instagram.com/ssu_jdje", youtube: "https://youtube.com/@ssu_jdje" },
+      { name: "연세대학교 연세국악연구회", school: "연세대학교", logo: imagePath("yonsei_logo.png"), isNew: false, instagram: "https://www.instagram.com/gugak_yonguk/", youtube: "https://www.youtube.com/@yonsei_gugak" },
+      { name: "이화여자대학교 닐리리화", school: "이화여자대학교", logo: imagePath("ewha_logo_wo_bg.png"), isNew: false, instagram: "https://www.instagram.com/lilyewha_official/", youtube: "https://www.youtube.com/@lilyewha7017" },
+      { name: "한국외국어대학교 얼소리", school: "한국외국어대학교", logo: imagePath("hufs_logo_wo_bg.png"), isNew: true, instagram: "https://instagram.com/hufs_eolsori", youtube: "https://youtube.com/@한국외대얼소리" }
     ];
 
     const parts = [

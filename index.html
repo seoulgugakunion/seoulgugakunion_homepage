@@ -7,20 +7,20 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./assets/css/styles.css">
 </head>
 <body data-page="home">
   <header class="topbar">
     <div class="wrap nav">
       <a class="brand" href="index.html">서울 국악 동아리 연합</a>
       <nav aria-label="주요 메뉴">
-        <ul class="nav-links"><li><a class="nav-link" href="about.html">소개</a></li><li><a class="nav-link" href="clubs.html">참여 동아리</a></li><li><a class="nav-link" href="parts.html">파트</a></li></ul>
+        <ul class="nav-links"><li><a class="nav-link" href="pages/about.html">소개</a></li><li><a class="nav-link" href="pages/clubs.html">참여 동아리</a></li><li><a class="nav-link" href="pages/parts.html">파트</a></li></ul>
       </nav>
       <button class="primary-btn" data-open-modal="contact"><span class="material-symbols-outlined">mail</span>Contact</button>
       <button class="icon-btn mobile-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false"><span class="material-symbols-outlined">menu</span></button>
     </div>
     <div class="mobile-panel" id="mobilePanel">
-      <a class="nav-link" href="about.html">소개</a><a class="nav-link" href="clubs.html">참여 동아리</a><a class="nav-link" href="parts.html">파트</a>
+      <a class="nav-link" href="pages/about.html">소개</a><a class="nav-link" href="pages/clubs.html">참여 동아리</a><a class="nav-link" href="pages/parts.html">파트</a>
       <button class="primary-btn" data-open-modal="contact"><span class="material-symbols-outlined">mail</span>Contact</button>
     </div>
   </header>
@@ -28,13 +28,13 @@
   <main>
     <section class="hero wrap" id="home" data-section="home">
       <div>
-        <div class="logo-ring" aria-hidden="true"><div class="logo-mark"><img src="./src/sgu_logo.png" alt=""></div></div>
+        <div class="logo-ring" aria-hidden="true"><div class="logo-mark"><img src="./assets/img/sgu_logo.png" alt=""></div></div>
         <h1>서울 국악 동아리 연합</h1>
         <p class="lead">서울의 대학 국악 동아리들이 함께 전통음악의 유산을 보존하고, 오늘의 무대 위에서 새롭게 울립니다.</p>
         <div class="hero-actions">
           <a class="social-btn" href="https://youtube.com/@ginue_punglyuhoe" target="_blank" rel="noopener"><span class="material-symbols-outlined">smart_display</span>YouTube</a>
           <a class="social-btn" href="https://instagram.com/ginue_punglyuhoe" target="_blank" rel="noopener"><span class="material-symbols-outlined">photo_camera</span>Instagram</a>
-          <button class="social-btn" data-link="clubs.html"><span class="material-symbols-outlined">groups</span>동아리 보기</button>
+          <button class="social-btn" data-link="pages/clubs.html"><span class="material-symbols-outlined">groups</span>동아리 보기</button>
         </div>
       </div>
     </section>
@@ -88,6 +88,6 @@
     </div>
   </div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="./app.js"></script>
+  <script src="./assets/js/app.js"></script>
 </body>
 </html>

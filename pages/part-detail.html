@@ -3,50 +3,31 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>참여 동아리 - 서울 국악 동아리 연합</title>
+  <title>파트 상세 - 서울 국악 동아리 연합</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
-<body data-page="clubs">
+<body data-page="parts">
   <header class="topbar">
     <div class="wrap nav">
-      <a class="brand" href="index.html">서울 국악 동아리 연합</a>
+      <a class="brand" href="../index.html">서울 국악 동아리 연합</a>
       <nav aria-label="주요 메뉴">
-        <ul class="nav-links"><li><a class="nav-link" href="about.html">소개</a></li><li><a class="nav-link" href="clubs.html" aria-current="page">참여 동아리</a></li><li><a class="nav-link" href="parts.html">파트</a></li></ul>
+        <ul class="nav-links"><li><a class="nav-link" href="about.html">소개</a></li><li><a class="nav-link" href="clubs.html">참여 동아리</a></li><li><a class="nav-link" href="parts.html" aria-current="page">파트</a></li></ul>
       </nav>
       <button class="primary-btn" data-open-modal="contact"><span class="material-symbols-outlined">mail</span>Contact</button>
       <button class="icon-btn mobile-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false"><span class="material-symbols-outlined">menu</span></button>
     </div>
     <div class="mobile-panel" id="mobilePanel">
-      <a class="nav-link" href="about.html">소개</a><a class="nav-link" href="clubs.html" aria-current="page">참여 동아리</a><a class="nav-link" href="parts.html">파트</a>
+      <a class="nav-link" href="about.html">소개</a><a class="nav-link" href="clubs.html">참여 동아리</a><a class="nav-link" href="parts.html" aria-current="page">파트</a>
       <button class="primary-btn" data-open-modal="contact"><span class="material-symbols-outlined">mail</span>Contact</button>
     </div>
   </header>
 
   <main>
-    <section class="band paper-band" id="clubs" data-section="clubs">
-      <div class="wrap">
-        <div class="section-head"><h2>참여 동아리</h2></div>
-        <div class="toolbar">
-          <div class="field">
-            <label for="clubSearch">동아리 검색</label>
-            <input id="clubSearch" type="search" placeholder="학교명, 동아리명으로 검색">
-          </div>
-          <div class="field">
-            <label for="clubFilter">분류</label>
-            <select id="clubFilter">
-              <option value="all">전체</option>
-              <option value="new">신규 참여</option>
-              <option value="instagram">Instagram 있음</option>
-              <option value="youtube">YouTube 있음</option>
-            </select>
-          </div>
-        </div>
-        <div class="club-list" id="clubList"></div>
-        <div class="empty" id="clubEmpty">검색 조건에 맞는 동아리가 없습니다.</div>
-      </div>
+    <section class="band" id="partDetailPage">
+      <div class="wrap" id="partDetailRoot"></div>
     </section>
   </main>
 
@@ -75,6 +56,6 @@
     </div>
   </div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="./app.js"></script>
+  <script src="../assets/js/app.js"></script>
 </body>
 </html>
