@@ -326,7 +326,8 @@ const clubs = [
 
     // 2. 스크롤 진입: 대상에 .reveal을 달고 뷰포트 진입 시 .in을 붙인다
     // 모바일은 요소가 살짝 걸치기만 해도(조금 더 일찍) 트리거되도록 기준을 완화한다
-    const REVEAL_SELECTOR = ".card, .section-head, .split > *, .footer-inner > *";
+    // 푸터는 제외 - 문서 맨 끝이라 하단 -8% 마진 때문에 큰 창에서 영영 등장하지 못한다
+    const REVEAL_SELECTOR = ".card, .section-head, .split > *";
     const revealViewport = window.matchMedia("(max-width: 860px)");
     let revealObserver = null;
 
