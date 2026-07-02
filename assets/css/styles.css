@@ -392,14 +392,14 @@
     .club-card h3 { font-size: 21px; position: relative; }
     .club-head {
       display: grid;
-      grid-template-columns: 72px 1fr;
+      grid-template-columns: 84px 1fr;
       gap: 18px;
       align-items: center;
       position: relative;
     }
     .club-logo {
-      width: 72px;
-      height: 72px;
+      width: 84px;
+      height: 84px;
       border-radius: 8px;
       border: 1px solid rgba(129, 118, 99, .18);
       background: #fffdf8;
