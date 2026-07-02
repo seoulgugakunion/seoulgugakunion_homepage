@@ -344,12 +344,6 @@
       font-weight: 700;
     }
     .bio p { color: var(--muted); margin: 16px 0 0; }
-    .toolbar {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 14px;
-      margin-bottom: 24px;
-    }
     .field { display: grid; gap: 8px; }
     label {
       color: var(--muted);
@@ -455,14 +449,6 @@
       border-left: 5px solid #fffdf8;
       border-top: 3.5px solid transparent;
       border-bottom: 3.5px solid transparent;
-    }
-    .empty {
-      display: none;
-      padding: 28px;
-      border: 1px dashed rgba(129, 118, 99, .45);
-      color: var(--muted);
-      text-align: center;
-      border-radius: 8px;
     }
     .part-card {
       min-height: 228px;
@@ -591,7 +577,7 @@
       .mobile-toggle { display: inline-flex; }
       .hero { min-height: auto; padding: 54px 0 72px; }
       .grid-3, .club-list, .part-grid { grid-template-columns: 1fr; }
-      .split, .split.reverse, .detail-grid, .toolbar { grid-template-columns: 1fr; }
+      .split, .split.reverse, .detail-grid { grid-template-columns: 1fr; }
       .split.reverse .portrait { order: -1; }
       .image-panel, .portrait { min-height: 320px; }
       .band { padding: 64px 0; }

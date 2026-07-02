@@ -165,13 +165,8 @@ const clubs = [
     }
 
     function renderClubs() {
-      const query = $("#clubSearch").value.trim().toLowerCase();
       const list = $("#clubList");
-      const filtered = clubs.filter(club => {
-        const haystack = `${club.name} ${club.school}`.toLowerCase();
-        return !query || haystack.includes(query);
-      });
-      list.innerHTML = filtered.map(club => `
+      list.innerHTML = clubs.map(club => `
         <article class="card club-card">
           <div class="club-main">
             <h3>${club.name}${club.isNew ? '<span class="badge">New</span>' : ""}</h3>
@@ -182,7 +177,6 @@ const clubs = [
           </div>
           <img class="club-logo" src="${club.logo}" alt="${club.school} 로고" loading="lazy">
         </article>`).join("");
-      $("#clubEmpty").style.display = filtered.length ? "none" : "block";
       refreshReveal(list);
     }
 
@@ -259,10 +253,7 @@ const clubs = [
     $("#modalClose").addEventListener("click", closeModal);
     modalBackdrop.addEventListener("click", event => { if (event.target === modalBackdrop) closeModal(); });
     document.addEventListener("keydown", event => { if (event.key === "Escape" && modalBackdrop.classList.contains("open")) closeModal(); });
-    if ($("#clubSearch") && $("#clubList")) {
-      $("#clubSearch").addEventListener("input", renderClubs);
-      renderClubs();
-    }
+    if ($("#clubList")) renderClubs();
     if ($("#partGrid")) renderParts();
     if ($("#partDetailRoot")) {
       const params = new URLSearchParams(window.location.search);
