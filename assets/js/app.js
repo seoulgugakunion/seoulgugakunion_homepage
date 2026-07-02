@@ -369,6 +369,27 @@ const clubs = [
       if (document.documentElement.classList.contains("m-reveal")) initReveal(root || document);
     }
 
+    // 안전장치: 카카오톡 등 인앱 브라우저는 열림 애니메이션 동안 페이지를 숨겨진
+    // 웹뷰에서 로드하는데, 이때 IntersectionObserver 콜백이 오지 않아 화면 안의
+    // 요소가 opacity 0에 갇힐 수 있다. 뷰포트와 겹치는데 아직 등장하지 못한 요소를
+    // 스크롤/표시/타이머 시점에 강제로 등장시킨다. 기준(뷰포트의 86% 지점)을
+    // 옵저버(92% 지점)보다 살짝 늦게 잡아 정상 브라우저에서는 옵저버가 먼저 처리한다.
+    function revealFallback() {
+      if (!document.documentElement.classList.contains("m-reveal")) return;
+      $$(".reveal:not(.in)").forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight * .86 && rect.bottom > 0) el.classList.add("in");
+      });
+    }
+    window.addEventListener("scroll", revealFallback, { passive: true });
+    window.addEventListener("resize", revealFallback);
+    window.addEventListener("pageshow", () => setTimeout(revealFallback, 300));
+    document.addEventListener("visibilitychange", () => {
+      if (!document.hidden) setTimeout(revealFallback, 300);
+    });
+    setTimeout(revealFallback, 800);
+    setTimeout(revealFallback, 2000);
+
     // 1. 히어로 인트로: 로고 링 위에 드로잉용 SVG 원을 주입(m-hero일 때만 표시)
     function injectHeroRing() {
       const ring = $(".logo-ring");
