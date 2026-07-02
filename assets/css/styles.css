@@ -676,7 +676,7 @@
 
     /* 2. 스크롤 진입: 카드/섹션이 아래에서 올라오며 페이드인
        시차 = 요소 순번(--reveal-i) x 간격(--reveal-step, 모바일에서 더 짧게) */
-    html { --reveal-step: 50ms; }
+    html { --reveal-step: 90ms; }
     html.m-reveal .reveal {
       opacity: 0;
       transform: translateY(18px);
@@ -760,7 +760,7 @@
 
     /* 모바일: 카드가 1열이라 시차·이동거리·전환시간을 줄여 더 경쾌하게 */
     @media (max-width: 860px) {
-      html { --reveal-step: 30ms; }
+      html { --reveal-step: 50ms; }
       html.m-reveal .reveal,
       html.m-reveal.m-hover .card.reveal {
         transform: translateY(14px);

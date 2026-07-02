@@ -335,20 +335,33 @@ const clubs = [
     }
 
     // 2. 스크롤 진입: 대상에 .reveal을 달고 뷰포트 진입 시 .in을 붙인다
+    // 모바일은 요소가 살짝 걸치기만 해도(조금 더 일찍) 트리거되도록 기준을 완화한다
     const REVEAL_SELECTOR = ".card, .section-head, .split > *, .footer-inner > *";
+    const revealViewport = window.matchMedia("(max-width: 860px)");
     let revealObserver = null;
+
+    function makeRevealObserver() {
+      return new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("in");
+          revealObserver.unobserve(entry.target);
+        });
+      }, revealViewport.matches
+        ? { threshold: 0.05, rootMargin: "0px 0px 2% 0px" }
+        : { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+    }
+
+    revealViewport.addEventListener("change", () => {
+      if (!revealObserver) return;
+      revealObserver.disconnect();
+      revealObserver = makeRevealObserver();
+      $$(".reveal:not(.in)").forEach(el => revealObserver.observe(el));
+    });
 
     function initReveal(root = document) {
       if (!("IntersectionObserver" in window)) return;
-      if (!revealObserver) {
-        revealObserver = new IntersectionObserver(entries => {
-          entries.forEach(entry => {
-            if (!entry.isIntersecting) return;
-            entry.target.classList.add("in");
-            revealObserver.unobserve(entry.target);
-          });
-        }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
-      }
+      if (!revealObserver) revealObserver = makeRevealObserver();
       $$(REVEAL_SELECTOR, root).forEach(el => {
         if (el.closest(".modal") || el.classList.contains("reveal")) return;
         el.classList.add("reveal");
