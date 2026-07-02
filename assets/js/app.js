@@ -193,6 +193,7 @@ const clubs = [
           </div>
         </article>`).join("");
       $("#clubEmpty").style.display = filtered.length ? "none" : "block";
+      refreshReveal(list);
     }
 
     function renderParts() {
@@ -205,6 +206,7 @@ const clubs = [
           </div>
           <span class="secondary-btn" style="width:max-content"><span class="material-symbols-outlined">arrow_forward</span>상세</span>
         </a>`).join("");
+      refreshReveal($("#partGrid"));
     }
 
     function renderPartDetail(name) {
@@ -235,6 +237,7 @@ const clubs = [
             <p style="margin-top:22px"><strong>연습 곡목:</strong> ${part.repertoire}</p>
           </div>
         </div>`;
+      refreshReveal(detail);
     }
 
     document.addEventListener("click", event => {
@@ -278,3 +281,168 @@ const clubs = [
       const params = new URLSearchParams(window.location.search);
       renderPartDetail(params.get("part") || "");
     }
+
+    /* ===== Motion graphics =====
+       각 효과는 플래그로 켜고 끌 수 있고, 상태는 localStorage(sgu-motion)에 저장된다.
+       플래그가 켜지면 <html>에 대응하는 m-* 클래스가 붙어 CSS 애니메이션이 활성화된다.
+       화면 우하단 설정 패널 또는 콘솔의 window.sguMotion.set(name, bool)으로 토글. */
+    const MOTION_KEY = "sgu-motion";
+    const MOTION_DEFAULTS = {
+      heroIntro: true,      // 1. 히어로 인트로(링 드로잉 + 타이틀 순차 등장)
+      scrollReveal: true,   // 2. 스크롤 진입 애니메이션
+      hoverFx: true,        // 3. 호버 마이크로 인터랙션
+      ambient: true,        // 4. 앰비언트 모티프(먹 블롭 + 워터마크 흔들림)
+      pageTransition: true  // 5. 페이지 전환(View Transitions)
+    };
+    const MOTION_LABELS = {
+      heroIntro: "히어로 인트로",
+      scrollReveal: "스크롤 등장",
+      hoverFx: "호버 효과",
+      ambient: "앰비언트 모션",
+      pageTransition: "페이지 전환"
+    };
+    const MOTION_CLASSES = {
+      heroIntro: "m-hero",
+      scrollReveal: "m-reveal",
+      hoverFx: "m-hover",
+      ambient: "m-ambient",
+      pageTransition: "m-vt"
+    };
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    function loadMotionFlags() {
+      try {
+        return { ...MOTION_DEFAULTS, ...JSON.parse(localStorage.getItem(MOTION_KEY) || "{}") };
+      } catch {
+        return { ...MOTION_DEFAULTS };
+      }
+    }
+    const motionFlags = loadMotionFlags();
+
+    function setMotionFlag(name, value) {
+      if (!(name in MOTION_DEFAULTS)) return;
+      motionFlags[name] = Boolean(value);
+      localStorage.setItem(MOTION_KEY, JSON.stringify(motionFlags));
+      applyMotionFlags();
+    }
+
+    function applyMotionFlags() {
+      const disabled = reducedMotion.matches;
+      Object.entries(MOTION_CLASSES).forEach(([flag, className]) => {
+        document.documentElement.classList.toggle(className, !disabled && motionFlags[flag]);
+      });
+      updateViewTransitionStyle(!disabled && motionFlags.pageTransition);
+      if (!disabled && motionFlags.scrollReveal) initReveal();
+      else clearReveal();
+    }
+
+    // 5. 페이지 전환: @view-transition은 클래스로 스코프할 수 없어 스타일 태그를 넣고 뺀다
+    function updateViewTransitionStyle(enabled) {
+      let style = $("#motionVtStyle");
+      if (enabled && !style) {
+        style = document.createElement("style");
+        style.id = "motionVtStyle";
+        style.textContent = `
+          @view-transition { navigation: auto; }
+          ::view-transition-old(root) { animation: m-vt-out .22s ease both; }
+          ::view-transition-new(root) { animation: m-vt-in .3s ease both; }
+          @keyframes m-vt-out { to { opacity: 0; } }
+          @keyframes m-vt-in { from { opacity: 0; transform: translateY(8px); } }`;
+        document.head.appendChild(style);
+      }
+      if (!enabled && style) style.remove();
+    }
+
+    // 2. 스크롤 진입: 대상에 .reveal을 달고 뷰포트 진입 시 .in을 붙인다
+    const REVEAL_SELECTOR = ".card, .section-head, .split > *, .footer-inner > *";
+    let revealObserver = null;
+
+    function initReveal(root = document) {
+      if (!("IntersectionObserver" in window)) return;
+      if (!revealObserver) {
+        revealObserver = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add("in");
+            revealObserver.unobserve(entry.target);
+          });
+        }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+      }
+      $$(REVEAL_SELECTOR, root).forEach(el => {
+        if (el.closest(".modal") || el.classList.contains("reveal")) return;
+        el.classList.add("reveal");
+        const revealed = [...el.parentElement.children].filter(child => child.classList.contains("reveal"));
+        el.style.setProperty("--reveal-delay", `${Math.min(revealed.indexOf(el), 5) * 90}ms`);
+        revealObserver.observe(el);
+      });
+    }
+
+    function clearReveal() {
+      $$(".reveal").forEach(el => {
+        el.classList.remove("reveal", "in");
+        el.style.removeProperty("--reveal-delay");
+      });
+      if (revealObserver) {
+        revealObserver.disconnect();
+        revealObserver = null;
+      }
+    }
+
+    // 동적 렌더(동아리 필터, 파트 목록 등) 후 새 요소를 옵저버에 등록
+    function refreshReveal(root) {
+      if (document.documentElement.classList.contains("m-reveal")) initReveal(root || document);
+    }
+
+    // 1. 히어로 인트로: 로고 링 위에 드로잉용 SVG 원을 주입(m-hero일 때만 표시)
+    function injectHeroRing() {
+      const ring = $(".logo-ring");
+      if (!ring || $(".motion-ring", ring)) return;
+      const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      svg.setAttribute("class", "motion-ring");
+      svg.setAttribute("viewBox", "0 0 100 100");
+      svg.setAttribute("aria-hidden", "true");
+      svg.innerHTML = '<circle cx="50" cy="50" r="49.4"></circle>';
+      ring.appendChild(svg);
+    }
+
+    // 설정 패널: 우하단 플로팅 버튼으로 열고 스위치로 플래그를 토글
+    function buildMotionPanel() {
+      const fab = document.createElement("button");
+      fab.type = "button";
+      fab.id = "motionFab";
+      fab.className = "icon-btn motion-fab";
+      fab.setAttribute("aria-label", "모션 그래픽 설정");
+      fab.setAttribute("aria-expanded", "false");
+      fab.innerHTML = '<span class="material-symbols-outlined">animation</span>';
+      const panel = document.createElement("div");
+      panel.id = "motionPanel";
+      panel.className = "motion-panel";
+      panel.innerHTML = `
+        <div class="motion-panel-head">모션 그래픽</div>
+        ${Object.keys(MOTION_DEFAULTS).map(flag => `
+          <label class="motion-row"><span>${MOTION_LABELS[flag]}</span>
+            <input type="checkbox" data-motion-flag="${flag}" ${motionFlags[flag] ? "checked" : ""}>
+          </label>`).join("")}
+        ${reducedMotion.matches ? '<p class="motion-note">시스템의 동작 줄이기 설정이 켜져 있어 모션이 표시되지 않습니다.</p>' : ""}`;
+      document.body.append(fab, panel);
+      fab.addEventListener("click", () => {
+        const open = !panel.classList.contains("open");
+        panel.classList.toggle("open", open);
+        fab.setAttribute("aria-expanded", String(open));
+      });
+      document.addEventListener("click", event => {
+        if (event.target.closest("#motionPanel, #motionFab")) return;
+        panel.classList.remove("open");
+        fab.setAttribute("aria-expanded", "false");
+      });
+      panel.addEventListener("change", event => {
+        const input = event.target.closest("[data-motion-flag]");
+        if (input) setMotionFlag(input.dataset.motionFlag, input.checked);
+      });
+    }
+
+    reducedMotion.addEventListener("change", applyMotionFlags);
+    injectHeroRing();
+    buildMotionPanel();
+    applyMotionFlags();
+    window.sguMotion = { flags: () => ({ ...motionFlags }), set: setMotionFlag };

@@ -608,3 +608,225 @@
       .card { padding: 22px; }
       .section-head::before, .section-head::after { display: none; }
     }
+
+    /* ===== Motion graphics =====
+       app.js가 플래그 상태에 따라 <html>에 m-* 클래스를 토글한다.
+       m-hero: 히어로 인트로 / m-reveal: 스크롤 등장 / m-hover: 호버 효과
+       m-ambient: 앰비언트 모션 / m-vt: 페이지 전환(스타일은 JS가 주입) */
+    @keyframes m-rise {
+      from { opacity: 0; transform: translateY(22px); }
+      to { opacity: 1; transform: none; }
+    }
+    @keyframes m-fade {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes m-breathe {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.015); }
+    }
+    @keyframes m-ring-draw {
+      from { stroke-dashoffset: 100; }
+      to { stroke-dashoffset: 0; }
+    }
+    @keyframes m-spin {
+      to { transform: rotate(360deg); }
+    }
+    @keyframes m-drift {
+      0%, 100% { transform: translate(-5%, -4%) scale(1); }
+      50% { transform: translate(6%, 6%) scale(1.12); }
+    }
+    @keyframes m-sway {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(7px) rotate(-3deg); }
+    }
+
+    /* 1. 히어로 인트로: 금색 링 드로잉 + 타이틀 순차 등장 + 숨쉬는 로고 */
+    .motion-ring {
+      position: absolute;
+      inset: -1px;
+      width: calc(100% + 2px);
+      height: calc(100% + 2px);
+      display: none;
+      pointer-events: none;
+    }
+    .motion-ring circle {
+      fill: none;
+      stroke: rgba(184, 138, 29, .55);
+      stroke-width: .7;
+      stroke-linecap: round;
+      transform: rotate(-90deg);
+      transform-origin: 50% 50%;
+    }
+    html.m-hero .motion-ring {
+      display: block;
+      animation: m-spin 140s linear 2.2s infinite;
+    }
+    html.m-hero .motion-ring circle {
+      stroke-dasharray: 98.5 1.5;
+      animation: m-ring-draw 1.8s cubic-bezier(.4, 0, .2, 1) .2s both;
+    }
+    html.m-hero .hero .logo-ring {
+      animation: m-fade 1s ease both, m-breathe 8s ease-in-out 2.4s infinite;
+    }
+    html.m-hero .hero h1 { animation: m-rise .9s cubic-bezier(.2, .7, .2, 1) .35s both; }
+    html.m-hero .hero .lead { animation: m-rise .9s cubic-bezier(.2, .7, .2, 1) .5s both; }
+    html.m-hero .hero .hero-actions { animation: m-rise .9s cubic-bezier(.2, .7, .2, 1) .65s both; }
+
+    /* 2. 스크롤 진입: 카드/섹션이 아래에서 올라오며 페이드인(시차는 --reveal-delay) */
+    html.m-reveal .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition:
+        opacity .7s ease var(--reveal-delay, 0ms),
+        transform .7s cubic-bezier(.2, .7, .2, 1) var(--reveal-delay, 0ms);
+    }
+    html.m-reveal .reveal.in {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* 3. 호버 마이크로 인터랙션: 리프트 대신 금색 보더/인셋 스트로크 전환 */
+    html.m-hover .card { transition: border-color .25s, background .25s, box-shadow .25s; }
+    html.m-hover .card:hover {
+      border-color: rgba(184, 138, 29, .55);
+      background: #fffdf8;
+      box-shadow: inset 0 0 0 1px rgba(184, 138, 29, .18);
+    }
+    /* 두 플래그가 동시에 켜지면 리빌 전환과 호버 전환을 한 목록으로 합친다 */
+    html.m-reveal.m-hover .card.reveal {
+      transition:
+        border-color .25s, background .25s, box-shadow .25s,
+        opacity .7s ease var(--reveal-delay, 0ms),
+        transform .7s cubic-bezier(.2, .7, .2, 1) var(--reveal-delay, 0ms);
+    }
+    html.m-hover .nav-link { position: relative; }
+    html.m-hover .nav-link:not([aria-current="page"])::after {
+      content: "";
+      position: absolute;
+      left: 3px;
+      right: 3px;
+      bottom: 6px;
+      height: 2px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .3s cubic-bezier(.2, .7, .2, 1);
+    }
+    html.m-hover .nav-link:not([aria-current="page"]):hover::after { transform: scaleX(1); }
+    html.m-hover .social-btn .material-symbols-outlined,
+    html.m-hover .primary-btn .material-symbols-outlined { transition: transform .3s; }
+    html.m-hover .social-btn:hover .material-symbols-outlined { transform: translateY(-2px) scale(1.08); }
+    html.m-hover .primary-btn:hover .material-symbols-outlined { transform: translateX(2px); }
+    html.m-hover .part-card .watermark { transition: transform .5s, color .5s; }
+    html.m-hover .part-card:hover .watermark {
+      transform: scale(1.08) rotate(4deg);
+      color: rgba(122, 89, 0, .1);
+    }
+
+    /* 4. 앰비언트 모티프: 히어로에 먹이 번지듯 떠다니는 블롭 + 워터마크 흔들림 */
+    html.m-ambient .hero {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+    }
+    html.m-ambient .hero::before,
+    html.m-ambient .hero::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      width: min(46vw, 560px);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(48px);
+    }
+    html.m-ambient .hero::before {
+      top: -8%;
+      left: -12%;
+      background: radial-gradient(circle, rgba(184, 138, 29, .1), transparent 65%);
+      animation: m-drift 26s ease-in-out infinite;
+    }
+    html.m-ambient .hero::after {
+      bottom: -10%;
+      right: -14%;
+      background: radial-gradient(circle, rgba(62, 102, 89, .09), transparent 65%);
+      animation: m-drift 32s ease-in-out -14s infinite reverse;
+    }
+    html.m-ambient .part-card .watermark { animation: m-sway 7s ease-in-out infinite; }
+
+    /* 모션 설정 패널(app.js가 주입) */
+    .motion-fab {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 60;
+      width: 46px;
+      min-height: 46px;
+      border-radius: 50%;
+      box-shadow: 0 10px 30px rgba(53, 93, 80, .16);
+    }
+    .motion-panel {
+      position: fixed;
+      right: 18px;
+      bottom: 74px;
+      z-index: 60;
+      width: 244px;
+      display: none;
+      background: var(--paper);
+      border: 1px solid rgba(129, 118, 99, .28);
+      border-radius: 8px;
+      box-shadow: 0 20px 40px rgba(53, 93, 80, .14);
+      padding: 14px;
+    }
+    .motion-panel.open { display: block; }
+    .motion-panel-head {
+      color: var(--gold);
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: .04em;
+      margin-bottom: 8px;
+    }
+    .motion-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 7px 0;
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0;
+      text-transform: none;
+      cursor: pointer;
+    }
+    .motion-row input {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 40px;
+      height: 22px;
+      min-height: 22px;
+      margin: 0;
+      padding: 0;
+      border-radius: 999px;
+      border: 1px solid rgba(129, 118, 99, .3);
+      background: #d8d2c4;
+      position: relative;
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .motion-row input::after {
+      content: "";
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #fffdf8;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, .18);
+      transition: transform .2s;
+    }
+    .motion-row input:checked { background: var(--green); }
+    .motion-row input:checked::after { transform: translateX(18px); }
+    .motion-note { margin: 8px 0 0; color: var(--muted); font-size: 12px; }
