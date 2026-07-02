@@ -663,7 +663,8 @@
       animation: m-spin 140s linear 2.2s infinite;
     }
     html.m-hero .motion-ring circle {
-      stroke-dasharray: 98.5 1.5;
+      /* 12 + .5 = 12.5 단위 주기가 pathLength 100에 8번 반복 → 흰 틈 8개 */
+      stroke-dasharray: 12 .5;
       animation: m-ring-draw 1.8s cubic-bezier(.4, 0, .2, 1) .2s both;
     }
     html.m-hero .hero .logo-ring {

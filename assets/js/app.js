@@ -385,7 +385,7 @@ const clubs = [
       svg.setAttribute("class", "motion-ring");
       svg.setAttribute("viewBox", "0 0 100 100");
       svg.setAttribute("aria-hidden", "true");
-      svg.innerHTML = '<circle cx="50" cy="50" r="49.4"></circle>';
+      svg.innerHTML = '<circle cx="50" cy="50" r="49.4" pathLength="100"></circle>';
       ring.appendChild(svg);
     }
 
