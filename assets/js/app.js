@@ -283,23 +283,15 @@ const clubs = [
     }
 
     /* ===== Motion graphics =====
-       각 효과는 플래그로 켜고 끌 수 있고, 상태는 localStorage(sgu-motion)에 저장된다.
        플래그가 켜지면 <html>에 대응하는 m-* 클래스가 붙어 CSS 애니메이션이 활성화된다.
-       화면 우하단 설정 패널 또는 콘솔의 window.sguMotion.set(name, bool)으로 토글. */
-    const MOTION_KEY = "sgu-motion";
+       기본값은 전부 켜짐이며, 개발 중에는 콘솔의 window.sguMotion.set(name, bool)으로
+       세션 한정 토글이 가능하다. */
     const MOTION_DEFAULTS = {
       heroIntro: true,      // 1. 히어로 인트로(링 드로잉 + 타이틀 순차 등장)
       scrollReveal: true,   // 2. 스크롤 진입 애니메이션
       hoverFx: true,        // 3. 호버 마이크로 인터랙션
       ambient: true,        // 4. 앰비언트 모티프(먹 블롭 + 워터마크 흔들림)
       pageTransition: true  // 5. 페이지 전환(View Transitions)
-    };
-    const MOTION_LABELS = {
-      heroIntro: "히어로 인트로",
-      scrollReveal: "스크롤 등장",
-      hoverFx: "호버 효과",
-      ambient: "앰비언트 모션",
-      pageTransition: "페이지 전환"
     };
     const MOTION_CLASSES = {
       heroIntro: "m-hero",
@@ -309,20 +301,12 @@ const clubs = [
       pageTransition: "m-vt"
     };
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-
-    function loadMotionFlags() {
-      try {
-        return { ...MOTION_DEFAULTS, ...JSON.parse(localStorage.getItem(MOTION_KEY) || "{}") };
-      } catch {
-        return { ...MOTION_DEFAULTS };
-      }
-    }
-    const motionFlags = loadMotionFlags();
+    const motionFlags = { ...MOTION_DEFAULTS };
+    localStorage.removeItem("sgu-motion"); // 설정 패널 시절의 저장값 정리
 
     function setMotionFlag(name, value) {
       if (!(name in MOTION_DEFAULTS)) return;
       motionFlags[name] = Boolean(value);
-      localStorage.setItem(MOTION_KEY, JSON.stringify(motionFlags));
       applyMotionFlags();
     }
 
@@ -405,44 +389,7 @@ const clubs = [
       ring.appendChild(svg);
     }
 
-    // 설정 패널: 우하단 플로팅 버튼으로 열고 스위치로 플래그를 토글
-    function buildMotionPanel() {
-      const fab = document.createElement("button");
-      fab.type = "button";
-      fab.id = "motionFab";
-      fab.className = "icon-btn motion-fab";
-      fab.setAttribute("aria-label", "모션 그래픽 설정");
-      fab.setAttribute("aria-expanded", "false");
-      fab.innerHTML = '<span class="material-symbols-outlined">animation</span>';
-      const panel = document.createElement("div");
-      panel.id = "motionPanel";
-      panel.className = "motion-panel";
-      panel.innerHTML = `
-        <div class="motion-panel-head">모션 그래픽</div>
-        ${Object.keys(MOTION_DEFAULTS).map(flag => `
-          <label class="motion-row"><span>${MOTION_LABELS[flag]}</span>
-            <input type="checkbox" data-motion-flag="${flag}" ${motionFlags[flag] ? "checked" : ""}>
-          </label>`).join("")}
-        ${reducedMotion.matches ? '<p class="motion-note">시스템의 동작 줄이기 설정이 켜져 있어 모션이 표시되지 않습니다.</p>' : ""}`;
-      document.body.append(fab, panel);
-      fab.addEventListener("click", () => {
-        const open = !panel.classList.contains("open");
-        panel.classList.toggle("open", open);
-        fab.setAttribute("aria-expanded", String(open));
-      });
-      document.addEventListener("click", event => {
-        if (event.target.closest("#motionPanel, #motionFab")) return;
-        panel.classList.remove("open");
-        fab.setAttribute("aria-expanded", "false");
-      });
-      panel.addEventListener("change", event => {
-        const input = event.target.closest("[data-motion-flag]");
-        if (input) setMotionFlag(input.dataset.motionFlag, input.checked);
-      });
-    }
-
     reducedMotion.addEventListener("change", applyMotionFlags);
     injectHeroRing();
-    buildMotionPanel();
     applyMotionFlags();
     window.sguMotion = { flags: () => ({ ...motionFlags }), set: setMotionFlag };
