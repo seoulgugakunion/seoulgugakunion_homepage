@@ -674,13 +674,15 @@
     html.m-hero .hero .lead { animation: m-rise .9s cubic-bezier(.2, .7, .2, 1) .5s both; }
     html.m-hero .hero .hero-actions { animation: m-rise .9s cubic-bezier(.2, .7, .2, 1) .65s both; }
 
-    /* 2. 스크롤 진입: 카드/섹션이 아래에서 올라오며 페이드인(시차는 --reveal-delay) */
+    /* 2. 스크롤 진입: 카드/섹션이 아래에서 올라오며 페이드인
+       시차 = 요소 순번(--reveal-i) x 간격(--reveal-step, 모바일에서 더 짧게) */
+    html { --reveal-step: 50ms; }
     html.m-reveal .reveal {
       opacity: 0;
       transform: translateY(18px);
       transition:
-        opacity .7s ease var(--reveal-delay, 0ms),
-        transform .7s cubic-bezier(.2, .7, .2, 1) var(--reveal-delay, 0ms);
+        opacity .7s ease calc(var(--reveal-i, 0) * var(--reveal-step)),
+        transform .7s cubic-bezier(.2, .7, .2, 1) calc(var(--reveal-i, 0) * var(--reveal-step));
     }
     html.m-reveal .reveal.in {
       opacity: 1;
@@ -698,8 +700,8 @@
     html.m-reveal.m-hover .card.reveal {
       transition:
         border-color .25s, background .25s, box-shadow .25s,
-        opacity .7s ease var(--reveal-delay, 0ms),
-        transform .7s cubic-bezier(.2, .7, .2, 1) var(--reveal-delay, 0ms);
+        opacity .7s ease calc(var(--reveal-i, 0) * var(--reveal-step)),
+        transform .7s cubic-bezier(.2, .7, .2, 1) calc(var(--reveal-i, 0) * var(--reveal-step));
     }
     html.m-hover .nav-link { position: relative; }
     html.m-hover .nav-link:not([aria-current="page"])::after {
@@ -755,3 +757,15 @@
       animation: m-drift 32s ease-in-out -14s infinite reverse;
     }
     html.m-ambient .part-card .watermark { animation: m-sway 7s ease-in-out infinite; }
+
+    /* 모바일: 카드가 1열이라 시차·이동거리·전환시간을 줄여 더 경쾌하게 */
+    @media (max-width: 860px) {
+      html { --reveal-step: 30ms; }
+      html.m-reveal .reveal,
+      html.m-reveal.m-hover .card.reveal {
+        transform: translateY(14px);
+        transition-duration: .45s;
+      }
+      html.m-reveal .reveal.in,
+      html.m-reveal.m-hover .card.reveal.in { transform: none; }
+    }

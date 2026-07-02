@@ -353,7 +353,7 @@ const clubs = [
         if (el.closest(".modal") || el.classList.contains("reveal")) return;
         el.classList.add("reveal");
         const revealed = [...el.parentElement.children].filter(child => child.classList.contains("reveal"));
-        el.style.setProperty("--reveal-delay", `${Math.min(revealed.indexOf(el), 5) * 90}ms`);
+        el.style.setProperty("--reveal-i", Math.min(revealed.indexOf(el), 5));
         revealObserver.observe(el);
       });
     }
@@ -361,7 +361,7 @@ const clubs = [
     function clearReveal() {
       $$(".reveal").forEach(el => {
         el.classList.remove("reveal", "in");
-        el.style.removeProperty("--reveal-delay");
+        el.style.removeProperty("--reveal-i");
       });
       if (revealObserver) {
         revealObserver.disconnect();
