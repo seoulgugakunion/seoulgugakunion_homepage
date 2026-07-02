@@ -189,7 +189,6 @@ const clubs = [
           <div class="club-actions">
             ${club.instagram ? `<a class="secondary-btn" href="${club.instagram}" target="_blank" rel="noreferrer"><span class="sr-only">Instagram</span><svg class="brand-svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.2" cy="6.8" r=".8" fill="currentColor" stroke="none"></circle></svg>Instagram</a>` : ""}
             ${club.youtube ? `<a class="secondary-btn" href="${club.youtube}" target="_blank" rel="noreferrer"><span class="sr-only">YouTube</span><span class="youtube-icon" aria-hidden="true"></span>YouTube</a>` : ""}
-            <button class="secondary-btn" data-club-contact="${club.name}"><span class="material-symbols-outlined">mail</span>문의</button>
           </div>
         </article>`).join("");
       $("#clubEmpty").style.display = filtered.length ? "none" : "block";
@@ -253,8 +252,6 @@ const clubs = [
       }
       const newsTrigger = event.target.closest("[data-news]");
       if (newsTrigger) openModal("news", newsTrigger.dataset.news);
-      const clubContact = event.target.closest("[data-club-contact]");
-      if (clubContact) openModal("contact", { topic: "동아리 가입", message: `${clubContact.dataset.clubContact} 관련 문의입니다. ` });
       const partContact = event.target.closest("[data-part-contact]");
       if (partContact) openModal("contact", { topic: "파트 상담", message: `${partContact.dataset.partContact} 파트 상담을 요청합니다. ` });
     });
