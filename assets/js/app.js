@@ -166,17 +166,10 @@ const clubs = [
 
     function renderClubs() {
       const query = $("#clubSearch").value.trim().toLowerCase();
-      const filter = $("#clubFilter").value;
       const list = $("#clubList");
       const filtered = clubs.filter(club => {
         const haystack = `${club.name} ${club.school}`.toLowerCase();
-        const matchesQuery = !query || haystack.includes(query);
-        const matchesFilter =
-          filter === "all" ||
-          (filter === "new" && club.isNew) ||
-          (filter === "instagram" && club.instagram) ||
-          (filter === "youtube" && club.youtube);
-        return matchesQuery && matchesFilter;
+        return !query || haystack.includes(query);
       });
       list.innerHTML = filtered.map(club => `
         <article class="card club-card">
@@ -268,9 +261,8 @@ const clubs = [
     $("#modalClose").addEventListener("click", closeModal);
     modalBackdrop.addEventListener("click", event => { if (event.target === modalBackdrop) closeModal(); });
     document.addEventListener("keydown", event => { if (event.key === "Escape" && modalBackdrop.classList.contains("open")) closeModal(); });
-    if ($("#clubSearch") && $("#clubFilter")) {
+    if ($("#clubSearch") && $("#clubList")) {
       $("#clubSearch").addEventListener("input", renderClubs);
-      $("#clubFilter").addEventListener("change", renderClubs);
       renderClubs();
     }
     if ($("#partGrid")) renderParts();
