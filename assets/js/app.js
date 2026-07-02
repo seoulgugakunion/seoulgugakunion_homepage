@@ -173,16 +173,14 @@ const clubs = [
       });
       list.innerHTML = filtered.map(club => `
         <article class="card club-card">
-          <div class="club-head">
-            <img class="club-logo" src="${club.logo}" alt="${club.school} 로고" loading="lazy">
-            <div>
-              <h3>${club.name}${club.isNew ? '<span class="badge">New</span>' : ""}</h3>
+          <div class="club-main">
+            <h3>${club.name}${club.isNew ? '<span class="badge">New</span>' : ""}</h3>
+            <div class="club-actions">
+              ${club.instagram ? `<a class="secondary-btn" href="${club.instagram}" target="_blank" rel="noreferrer"><span class="sr-only">Instagram</span><svg class="brand-svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.2" cy="6.8" r=".8" fill="currentColor" stroke="none"></circle></svg>Instagram</a>` : ""}
+              ${club.youtube ? `<a class="secondary-btn" href="${club.youtube}" target="_blank" rel="noreferrer"><span class="sr-only">YouTube</span><span class="youtube-icon" aria-hidden="true"></span>YouTube</a>` : ""}
             </div>
           </div>
-          <div class="club-actions">
-            ${club.instagram ? `<a class="secondary-btn" href="${club.instagram}" target="_blank" rel="noreferrer"><span class="sr-only">Instagram</span><svg class="brand-svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.2" cy="6.8" r=".8" fill="currentColor" stroke="none"></circle></svg>Instagram</a>` : ""}
-            ${club.youtube ? `<a class="secondary-btn" href="${club.youtube}" target="_blank" rel="noreferrer"><span class="sr-only">YouTube</span><span class="youtube-icon" aria-hidden="true"></span>YouTube</a>` : ""}
-          </div>
+          <img class="club-logo" src="${club.logo}" alt="${club.school} 로고" loading="lazy">
         </article>`).join("");
       $("#clubEmpty").style.display = filtered.length ? "none" : "block";
       refreshReveal(list);
