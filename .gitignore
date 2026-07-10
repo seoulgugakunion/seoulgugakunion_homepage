@@ -1,4 +1,5 @@
 .DS_Store
+*.xlsx
 test_site_cdp.py
 test_split_site.py
 stitch_seoul_gugak_union_web/
