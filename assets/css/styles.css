@@ -344,10 +344,22 @@
     .bio h3 {
       margin-top: 24px;
     }
+    body[data-page="about"] .bio p,
+    body[data-page="about"] .value-list {
+      font-size: clamp(17px, 1.35vw, 19px);
+      line-height: 1.75;
+    }
+    body[data-page="about"] .value-list dt {
+      font-size: clamp(18px, 1.5vw, 20px);
+    }
+    .owner-bio h3 {
+      font-size: clamp(32px, 5vw, 46px);
+      margin-top: 0;
+    }
     .bio .role {
       margin-top: 4px;
       color: rgba(28, 28, 24, .7);
-      font-size: 18px;
+      font-size: clamp(19px, 1.6vw, 21px);
       font-weight: 700;
     }
     .bio p { color: var(--muted); margin: 16px 0 0; }
