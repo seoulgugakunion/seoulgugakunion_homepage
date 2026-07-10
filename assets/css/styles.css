@@ -89,6 +89,13 @@
       border-bottom: 2px solid var(--gold);
     }
     .nav-link:hover, .footer-links a:hover { color: var(--gold); }
+    .footer-email {
+      display: inline-block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .footer-email:hover { color: var(--gold); }
     .primary-btn, .secondary-btn, .icon-btn {
       min-height: 42px;
       border-radius: 4px;
@@ -294,30 +301,30 @@
       border-radius: 4px;
       border: 1px solid rgba(129, 118, 99, .18);
       background:
-        linear-gradient(rgba(252, 249, 242, .18), rgba(252, 249, 242, .18)),
-        url("https://lh3.googleusercontent.com/aida-public/AB6AXuC1Y5ftelF_qZLrPrIh74Pn9SwnmNLHt4rV3qyR9Oz4STx96jiEaV4oZ0uxnqj4lNuVtlTR2cqEodOik72uNMYvk2vo3XtpxWhVww0b4hvHNO22Ytb6iUhNrgIE5lWzF_OWxvDitYgXMl-CfsUgWB4QtOwLQOQBcmDFQJep3UJyK5QtEHuP0v179sq_MrZu5XRCmr443J7zntR3W9_GJAA3McY0HCIhzRwboKYh4bNbU3uPD-xZelrA4AqJMhXzfuNU8Tdbp8dFOIA") center/cover;
+        linear-gradient(rgba(252, 249, 242, .12), rgba(252, 249, 242, .12)),
+        url("../img/about_title.jpeg") center/cover;
     }
+    .value-heading { align-self: start; }
+    .value-list { margin: 0; display: grid; gap: 0; }
+    .value-list > div { padding: 22px 0; border-top: 1px solid rgba(129, 118, 99, .24); }
+    .value-list > div:last-child { border-bottom: 1px solid rgba(129, 118, 99, .24); }
+    .value-list dt { color: var(--gold); font-weight: 800; letter-spacing: .04em; }
+    .value-list dd { margin: 8px 0 0; color: var(--muted); }
+    .value-list ol { margin: 0; padding-left: 1.4em; }
+    .value-list li + li { margin-top: 4px; }
     .portrait {
       min-height: 520px;
       border-radius: 4px;
       border: 1px solid rgba(129, 118, 99, .18);
-      background: linear-gradient(135deg, #e7dfce, #faf7ef 50%, #cfc3ad);
+      background: #e7dfce;
       position: relative;
       overflow: hidden;
     }
-    .portrait::after {
-      content: attr(data-name);
-      position: absolute;
-      inset: auto 22px 22px;
-      color: rgba(122, 89, 0, .35);
-      font-family:
-        "Pretendard",
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
-      font-size: 54px;
-      font-weight: 700;
+    .portrait img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
     }
     .conductor-photo {
       width: min(360px, 100%);

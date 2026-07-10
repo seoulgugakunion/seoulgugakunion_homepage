@@ -13,19 +13,19 @@ const clubs = [
     ];
 
     const parts = [
-      { name: "가야금", en: "Gayageum", icon: "music_note", leader: "김서연", status: "신입 3명 모집", members: ["이준호", "박지민", "최수아", "정현우", "강민지", "윤도현"], repertoire: "침향무, 도라지 변주곡" },
-      { name: "거문고", en: "Geomungo", icon: "graphic_eq", leader: "오민재", status: "상시 상담 가능", members: ["한유진", "배성우", "문채린", "서지훈"], repertoire: "수연장지곡, 출강" },
-      { name: "대금", en: "Daegeum", icon: "waves", leader: "장하늘", status: "신입 2명 모집", members: ["김태오", "윤세아", "백준서", "임가은", "노현"], repertoire: "청성곡, 평조회상" },
-      { name: "아쟁", en: "Ajaeng", icon: "horizontal_rule", leader: "신다온", status: "경험자 우대", members: ["정유민", "강태림", "이건"], repertoire: "산조 합주, 남도굿거리" },
-      { name: "피리", en: "Piri", icon: "straight", leader: "박은호", status: "기초반 운영", members: ["고수빈", "최민규", "홍예린", "유재현"], repertoire: "상령산, 염양춘" },
-      { name: "타악", en: "Percussion", icon: "radio_button_checked", leader: "류지완", status: "신입 4명 모집", members: ["권도윤", "이소담", "차민성", "남지아", "문성호"], repertoire: "삼도설장구, 판굿" },
-      { name: "해금", en: "Haegeum", icon: "music_video", leader: "서아린", status: "상시 상담 가능", members: ["조하윤", "김민석", "이유나", "박하람", "안재원", "최라희"], repertoire: "지영희류 산조, 적념" }
+      { name: "가야금", en: "Gayageum", icon: "music_note", leader: "김유진", members: ["최다영 (부수석)", "김나우", "원예주"] },
+      { name: "거문고", en: "Geomungo", icon: "graphic_eq", leader: "최정우", members: ["구동현 (부수석)", "김나현", "김수정", "이유정"] },
+      { name: "대금", en: "Daegeum", icon: "waves", leader: "최규진", members: ["남기태 (부수석)", "신하진 (부수석)", "강다율", "권하람", "김규림"] },
+      { name: "아쟁", en: "Ajaeng", icon: "horizontal_rule", leader: "신재희", members: ["이예솔"] },
+      { name: "피리", en: "Piri", icon: "straight", leader: "최은희", members: ["강현지", "권구완", "심재호"] },
+      { name: "타악", en: "Percussion", icon: "radio_button_checked", leader: "김가은", members: ["강예리", "강예서", "사아동", "소유나", "황지은"] },
+      { name: "해금", en: "Haegeum", icon: "music_video", leader: "이예원", members: ["김서연", "김의랑", "김주은", "류혜윤", "백지민", "심예림", "양수지", "이유민", "이지현", "이희원", "장이재", "장진형", "전희린"] }
     ];
 
     const news = {
-      concert: { title: "정기 공연 안내", body: "2026년 8월 22일 토요일 오후 5시, 서울 시민청 바스락홀에서 여름 정기 공연을 엽니다. 좌석 예약은 문의 폼으로 이름, 연락처, 희망 매수를 보내면 운영진이 확인 후 회신합니다." },
+      concert: { title: "정기 공연 안내", body: "2027년 1월 23일 토요일 제2회 열린국악연주회가 열립니다. 자세한 소식은 추후 홈페이지 및 SNS를 통해 확인하실 수 있습니다." },
       join: { title: "신규 동아리 모집", body: "서울 소재 대학 국악 동아리는 연중 가입 상담이 가능합니다. 활동 악기, 대표 연락처, 최근 공연 또는 연습 이력을 문의 폼에 남겨 주세요. 운영진 검토 후 합동 연습 일정과 회칙을 안내합니다." },
-      archive: { title: "국악 아카이브", body: "공연 영상, 파트별 연습 음원, 악보 링크는 참여 동아리 확인 후 공유됩니다. 자료 접근 신청은 소속 동아리와 필요한 자료 범위를 적어 문의해 주세요." }
+      performance: { title: "공연 요청 및 홍보 문의", body: "서울국악동아리연합은 다양한 행사 및 축제에서 공연을 진행하고 있습니다. 공연을 희망하시는 경우 행사명, 일정, 장소, 요청 사항 등 관련 내용을 적어 문의해 주세요." }
     };
 
     const $ = (selector, root = document) => root.querySelector(selector);
@@ -204,21 +204,18 @@ const clubs = [
           <p class="lead" style="margin-left:0">파트 목록에서 다시 선택해 주세요.</p>`;
         return;
       }
-      document.title = `${part.name} 파트 - 서울 국악 동아리 연합`;
+      document.title = `${part.name} 파트 - 서울국악동아리연합`;
       detail.innerHTML = `
         <a class="secondary-btn" href="parts.html"><span class="material-symbols-outlined">arrow_back</span>파트 목록</a>
         <h2 style="margin-top:22px">${part.name}</h2>
         <div class="detail-grid" style="margin-top:24px">
           <div class="card">
-            <span class="eyebrow">파트장</span>
+            <span class="eyebrow">수석</span>
             <h3>${part.leader}</h3>
-            <p style="margin-top:8px">${part.status}</p>
-            <button class="primary-btn" style="margin-top:18px" data-part-contact="${part.name}"><span class="material-symbols-outlined">mail</span>상담 문의</button>
           </div>
           <div class="card">
-            <span class="eyebrow">파트원</span>
+            <span class="eyebrow">단원</span>
             <ul class="member-list">${part.members.map(member => `<li>${member}</li>`).join("")}</ul>
-            <p style="margin-top:22px"><strong>연습 곡목:</strong> ${part.repertoire}</p>
           </div>
         </div>`;
       refreshReveal(detail);
