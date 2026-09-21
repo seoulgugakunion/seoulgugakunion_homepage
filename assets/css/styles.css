@@ -1,16 +1,16 @@
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
     :root {
-      --paper: #fcf9f2;
-      --paper-2: #f1eee7;
-      --paper-3: #ebe8e1;
-      --card: #fbf9f5;
-      --ink: #1c1c18;
-      --muted: #4f4636;
-      --line: #d2c5b0;
-      --gold: #7a5900;
-      --gold-2: #b88a1d;
-      --green: #3e6659;
-      --green-dark: #264e42;
+      --paper: #fafbf8;
+      --paper-2: #eef2e9;
+      --paper-3: #e3e9de;
+      --card: #ffffff;
+      --ink: #202720;
+      --muted: #505b50;
+      --line: #d5ddd1;
+      --gold: #3d6041;
+      --gold-2: #9bd088;
+      --green: #3d6041;
+      --green-dark: #28432c;
       --error: #ba1a1a;
       --ok: #2f6f4e;
       --max: 1280px;
@@ -48,8 +48,8 @@
       position: sticky;
       top: 0;
       z-index: 40;
-      border-bottom: 1px solid rgba(129, 118, 99, .18);
-      background: rgba(252, 249, 242, .88);
+      border-bottom: 1px solid rgba(86, 108, 81, .18);
+      background: rgba(250, 251, 248, .88);
       backdrop-filter: blur(14px);
     }
     .nav {
@@ -118,25 +118,25 @@
     .primary-btn:hover { background: var(--green-dark); }
     .secondary-btn {
       background: transparent;
-      border-color: rgba(122, 89, 0, .45);
+      border-color: rgba(61, 96, 65, .45);
       color: var(--gold);
       padding: 9px 16px;
       font-size: 12px;
       font-weight: 700;
       letter-spacing: .05em;
     }
-    .secondary-btn:hover { background: rgba(122, 89, 0, .08); }
+    .secondary-btn:hover { background: rgba(61, 96, 65, .08); }
     .icon-btn {
       width: 44px;
       padding: 0;
       background: var(--paper-2);
-      border-color: rgba(129, 118, 99, .2);
+      border-color: rgba(86, 108, 81, .2);
       color: var(--gold);
     }
     .mobile-toggle { display: none; }
     .mobile-panel {
       display: none;
-      border-top: 1px solid rgba(129, 118, 99, .14);
+      border-top: 1px solid rgba(86, 108, 81, .14);
       padding: 14px 20px 22px;
     }
     .mobile-panel.open {
@@ -154,8 +154,8 @@
       padding: 12px 14px;
       border-radius: 4px;
       font-size: 16px;
-      background: rgba(241, 238, 231, .72);
-      border: 1px solid rgba(129, 118, 99, .12);
+      background: rgba(238, 242, 233, .72);
+      border: 1px solid rgba(86, 108, 81, .12);
       text-align: left;
     }
     .mobile-panel .primary-btn {
@@ -176,24 +176,29 @@
       width: min(340px, 74vw);
       margin: 0 auto 38px;
       padding: 22px;
-      border: 1px solid rgba(129, 118, 99, .16);
+      border: 1px solid rgba(86, 108, 81, .16);
       border-radius: 50%;
     }
     .logo-ring::before {
       content: "";
       position: absolute;
       inset: 14px;
-      border: 1px solid rgba(184, 138, 29, .16);
+      border: 1px solid rgba(155, 208, 136, .16);
       border-radius: 50%;
     }
     .logo-mark {
+      width: 100%;
+      touch-action: pan-y;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-touch-callout: none;
       position: relative;
       aspect-ratio: 1;
       border-radius: 50%;
       display: grid;
       place-items: center;
-      background: radial-gradient(circle, #fffdf8, #eee7d8);
-      border: 1px solid rgba(122, 89, 0, .18);
+      background: #f1f5ec;
+      border: 1px solid rgba(61, 96, 65, .18);
       overflow: hidden;
       padding: 28px;
     }
@@ -232,7 +237,7 @@
     .social-btn {
       min-width: 168px;
       background: var(--paper-2);
-      border: 1px solid rgba(129, 118, 99, .18);
+      border: 1px solid rgba(86, 108, 81, .18);
       color: var(--ink);
       padding: 14px 18px;
       border-radius: 4px;
@@ -247,9 +252,9 @@
     .social-btn span { color: var(--gold); }
     .band {
       padding: 88px 0;
-      border-top: 1px solid rgba(129, 118, 99, .14);
+      border-top: 1px solid rgba(86, 108, 81, .14);
     }
-    .paper-band { background: rgba(241, 238, 231, .64); }
+    .paper-band { background: rgba(238, 242, 233, .64); }
     .section-head {
       display: flex;
       align-items: center;
@@ -261,7 +266,7 @@
       content: "";
       height: 1px;
       flex: 1;
-      background: rgba(129, 118, 99, .28);
+      background: rgba(86, 108, 81, .28);
     }
     .eyebrow {
       display: inline-block;
@@ -275,7 +280,7 @@
     .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
     .card {
       background: var(--card);
-      border: 1px solid #ded9cc;
+      border: 1px solid #d5ddd1;
       border-radius: 8px;
       padding: 28px;
     }
@@ -285,7 +290,7 @@
       color: inherit;
       transition: border-color .2s, background .2s;
     }
-    .news-card:hover { border-color: rgba(122, 89, 0, .5); background: #fffdf8; }
+    .news-card:hover { border-color: rgba(61, 96, 65, .5); background: #ffffff; }
     .news-card .material-symbols-outlined { color: var(--gold); font-size: 30px; }
     .news-card h3 { font-size: 22px; margin: 18px 0 8px; }
     .news-card p, .card p { color: var(--muted); margin: 0; }
@@ -299,15 +304,15 @@
     .image-panel {
       min-height: 420px;
       border-radius: 4px;
-      border: 1px solid rgba(129, 118, 99, .18);
+      border: 1px solid rgba(86, 108, 81, .18);
       background:
-        linear-gradient(rgba(252, 249, 242, .12), rgba(252, 249, 242, .12)),
+        linear-gradient(rgba(250, 251, 248, .12), rgba(250, 251, 248, .12)),
         url("../img/about_title.jpeg") center/cover;
     }
     .value-heading { align-self: start; }
     .value-list { margin: 0; display: grid; gap: 0; }
-    .value-list > div { padding: 22px 0; border-top: 1px solid rgba(129, 118, 99, .24); }
-    .value-list > div:last-child { border-bottom: 1px solid rgba(129, 118, 99, .24); }
+    .value-list > div { padding: 22px 0; border-top: 1px solid rgba(86, 108, 81, .24); }
+    .value-list > div:last-child { border-bottom: 1px solid rgba(86, 108, 81, .24); }
     .value-list dt { color: var(--gold); font-weight: 800; letter-spacing: .04em; }
     .value-list dd { margin: 8px 0 0; color: var(--muted); }
     .value-list ol { margin: 0; padding-left: 1.4em; }
@@ -315,8 +320,8 @@
     .portrait {
       min-height: 520px;
       border-radius: 4px;
-      border: 1px solid rgba(129, 118, 99, .18);
-      background: #e7dfce;
+      border: 1px solid rgba(86, 108, 81, .18);
+      background: #e3e9de;
       position: relative;
       overflow: hidden;
     }
@@ -332,8 +337,8 @@
       aspect-ratio: 1;
       border-radius: 50%;
       overflow: hidden;
-      border: 1px solid rgba(129, 118, 99, .2);
-      background: #fffdf8;
+      border: 1px solid rgba(86, 108, 81, .2);
+      background: #ffffff;
       box-shadow: 0 20px 50px rgba(53, 93, 80, .1);
     }
     .conductor-photo img {
@@ -358,7 +363,7 @@
     }
     .bio .role {
       margin-top: 4px;
-      color: rgba(28, 28, 24, .7);
+      color: rgba(32, 39, 32, .7);
       font-size: clamp(19px, 1.6vw, 21px);
       font-weight: 700;
     }
@@ -374,15 +379,15 @@
     input, select, textarea {
       width: 100%;
       min-height: 46px;
-      border: 1px solid #ded9cc;
+      border: 1px solid #d5ddd1;
       border-radius: 4px;
-      background: #fffdf8;
+      background: #ffffff;
       color: var(--ink);
       padding: 10px 12px;
       outline: none;
     }
     textarea { min-height: 128px; resize: vertical; }
-    input:focus, select:focus, textarea:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(184, 138, 29, .12); }
+    input:focus, select:focus, textarea:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(155, 208, 136, .12); }
     .club-list, .part-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
     .club-card {
       min-height: 190px;
@@ -401,7 +406,7 @@
       right: -22px;
       top: -22px;
       border-radius: 0 0 0 80px;
-      background: rgba(241, 238, 231, .9);
+      background: rgba(238, 242, 233, .9);
     }
     .club-card h3 { font-size: 21px; position: relative; }
     .club-main {
@@ -413,8 +418,8 @@
       width: 112px;
       height: 112px;
       border-radius: 8px;
-      border: 1px solid rgba(129, 118, 99, .18);
-      background: #fffdf8;
+      border: 1px solid rgba(86, 108, 81, .18);
+      background: #ffffff;
       padding: 12px;
       object-fit: contain;
       position: relative;
@@ -465,7 +470,7 @@
       top: 3px;
       width: 0;
       height: 0;
-      border-left: 5px solid #fffdf8;
+      border-left: 5px solid #ffffff;
       border-top: 3.5px solid transparent;
       border-bottom: 3.5px solid transparent;
     }
@@ -480,21 +485,21 @@
       flex-direction: column;
       justify-content: space-between;
     }
-    .part-card:hover { border-color: rgba(122, 89, 0, .5); }
+    .part-card:hover { border-color: rgba(61, 96, 65, .5); }
     .part-card h3 { font-size: 28px; }
     .part-card p { color: var(--muted); margin: 4px 0 0; }
     .part-card .watermark {
       position: absolute;
       right: -18px;
       top: -18px;
-      color: rgba(28, 28, 24, .06);
+      color: rgba(32, 39, 32, .06);
       font-size: 112px;
     }
     .part-detail {
       display: none;
       margin-top: 42px;
       padding-top: 42px;
-      border-top: 1px solid rgba(129, 118, 99, .18);
+      border-top: 1px solid rgba(86, 108, 81, .18);
     }
     .part-detail.open { display: block; }
     .detail-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 32px; }
@@ -511,7 +516,7 @@
       width: 7px;
       height: 7px;
       display: inline-block;
-      background: rgba(122, 89, 0, .45);
+      background: rgba(61, 96, 65, .45);
       margin-right: 10px;
       vertical-align: middle;
     }
@@ -540,7 +545,7 @@
       align-items: center;
       justify-content: center;
       padding: 20px;
-      background: rgba(28, 28, 24, .42);
+      background: rgba(32, 39, 32, .42);
     }
     .modal-backdrop.open { display: flex; }
     .modal {
@@ -548,20 +553,20 @@
       max-height: min(760px, calc(100vh - 40px));
       overflow: auto;
       background: var(--paper);
-      border: 1px solid rgba(129, 118, 99, .28);
+      border: 1px solid rgba(86, 108, 81, .28);
       border-radius: 8px;
       box-shadow: 0 20px 60px rgba(53, 93, 80, .18);
     }
     .modal-head {
       position: sticky;
       top: 0;
-      background: rgba(252, 249, 242, .94);
+      background: rgba(250, 251, 248, .94);
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 16px;
       padding: 20px 24px;
-      border-bottom: 1px solid rgba(129, 118, 99, .16);
+      border-bottom: 1px solid rgba(86, 108, 81, .16);
     }
     .modal-body { padding: 24px; }
     .modal h2 { font-size: 30px; }
@@ -580,7 +585,7 @@
     footer {
       margin-top: auto;
       background: var(--paper-2);
-      border-top: 1px solid rgba(129, 118, 99, .16);
+      border-top: 1px solid rgba(86, 108, 81, .16);
       padding: 44px 0;
     }
     .footer-inner {
@@ -658,7 +663,7 @@
     }
     .motion-ring circle {
       fill: none;
-      stroke: rgba(184, 138, 29, .55);
+      stroke: rgba(155, 208, 136, .55);
       stroke-width: .7;
       stroke-linecap: round;
       transform: rotate(-90deg);
@@ -698,9 +703,9 @@
     /* 3. 호버 마이크로 인터랙션: 리프트 대신 금색 보더/인셋 스트로크 전환 */
     html.m-hover .card { transition: border-color .25s, background .25s, box-shadow .25s; }
     html.m-hover .card:hover {
-      border-color: rgba(184, 138, 29, .55);
-      background: #fffdf8;
-      box-shadow: inset 0 0 0 1px rgba(184, 138, 29, .18);
+      border-color: rgba(155, 208, 136, .55);
+      background: #ffffff;
+      box-shadow: inset 0 0 0 1px rgba(155, 208, 136, .18);
     }
     /* 두 플래그가 동시에 켜지면 리빌 전환과 호버 전환을 한 목록으로 합친다 */
     html.m-reveal.m-hover .card.reveal {
@@ -730,7 +735,7 @@
     html.m-hover .part-card .watermark { transition: transform .5s, color .5s; }
     html.m-hover .part-card:hover .watermark {
       transform: scale(1.08) rotate(4deg);
-      color: rgba(122, 89, 0, .1);
+      color: rgba(61, 96, 65, .1);
     }
 
     /* 4. 앰비언트 모티프: 히어로에 먹이 번지듯 떠다니는 블롭 + 워터마크 흔들림
@@ -754,7 +759,7 @@
     html.m-ambient .hero::before {
       top: 2%;
       left: calc(50% - 50vw + 4vw);
-      background: radial-gradient(circle, rgba(184, 138, 29, .1), transparent 62%);
+      background: radial-gradient(circle, rgba(155, 208, 136, .1), transparent 62%);
       animation: m-drift 26s ease-in-out infinite;
     }
     html.m-ambient .hero::after {
@@ -775,4 +780,30 @@
       }
       html.m-reveal .reveal.in,
       html.m-reveal.m-hover .card.reveal.in { transform: none; }
+    }
+
+    /* Renewal identity: monochrome marks with S / G / U accent colors. */
+    :root { --rose: #d08888; --leaf: #9bd088; --yellow: #d0cb88; }
+    .nav > .brand { display: block; flex-shrink: 0; line-height: 0; }
+    .brand-logo { width: clamp(190px, 23vw, 256px); height: auto; }
+    .logo-mark { cursor: default; -webkit-tap-highlight-color: transparent; }
+    .logo-mark img { pointer-events: none; }
+    .logo-mark:focus-visible, a:focus-visible, button:focus-visible { outline: 3px solid var(--green); outline-offset: 5px; }
+    .logo-story-heading { text-align: center; max-width: 760px; margin: 0 auto 36px; }
+    .logo-story-heading p { color: var(--muted); font-size: clamp(18px, 2vw, 21px); margin: 20px 0 0; }
+    .logo-diagram { margin: 0; overflow: hidden; border-radius: 16px; background: #302b28; }
+    .logo-diagram img { width: 100%; height: auto; }
+    .logo-meanings { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin: 32px 0; }
+    .logo-meanings > div { border-bottom: 1px solid var(--line); padding-bottom: 24px; }
+    .logo-meanings dt { display: flex; align-items: center; gap: 14px; font-size: 21px; font-weight: 800; }
+    .logo-letter { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; font-size: 25px; color: #202720; }
+    .letter-s { background: var(--rose); }
+    .letter-g { background: var(--leaf); }
+    .letter-u { background: var(--yellow); }
+    .logo-meanings dd { margin: 16px 0 0; font-size: 17px; color: var(--muted); }
+    .logo-story-copy { max-width: 820px; margin: 32px auto 0; font-size: 18px; color: var(--muted); line-height: 1.85; word-break: keep-all; }
+    @media (max-width: 860px) {
+      .logo-meanings { grid-template-columns: 1fr; gap: 20px; }
+      .logo-story-copy { font-size: 17px; }
+      .nav { gap: 12px; }
     }
