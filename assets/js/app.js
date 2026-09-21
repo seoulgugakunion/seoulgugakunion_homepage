@@ -13,13 +13,13 @@ const clubs = [
     ];
 
     const parts = [
-      { name: "가야금", en: "Gayageum", icon: "music_note", leader: "김유진", members: ["최다영 (부수석)", "김나우", "김하린", "원예주"] },
-      { name: "거문고", en: "Geomungo", icon: "graphic_eq", leader: "최정우", members: ["구동현 (부수석)", "김나현", "김수정", "이유정"] },
-      { name: "대금", en: "Daegeum", icon: "waves", leader: "최규진", members: ["남기태 (부수석)", "신하진 (부수석)", "강다율", "권하람", "김규림"] },
-      { name: "아쟁", en: "Ajaeng", icon: "horizontal_rule", leader: "신재희", members: ["이예솔"] },
-      { name: "피리", en: "Piri", icon: "straight", leader: "최은희", members: ["강현지", "권구완", "심재호"] },
-      { name: "타악", en: "Percussion", icon: "radio_button_checked", leader: "김가은", members: ["강예리", "강예서", "사아동", "소유나", "황지은"] },
-      { name: "해금", en: "Haegeum", icon: "music_video", leader: "이예원", members: ["김서연", "김의랑", "류혜윤", "백지민", "심예림", "이유민", "이지현", "이희원", "장이재", "전희린"] }
+      { name: "가야금", en: "Gayageum", icon: "music_note", leader: "김유진", members: ["최다영 (부수석)", "김나우", "김하린", "배이서", "원예주"] },
+      { name: "거문고", en: "Geomungo", icon: "graphic_eq", leader: "최정우", members: ["구동현 (부수석)", "김나현", "김수정", "김채윤", "김태영", "이유정"] },
+      { name: "대금", en: "Daegeum", icon: "waves", leader: "최규진", members: ["남기태 (부수석)", "신하진 (부수석)", "강다율", "권하람", "김규림", "김동현", "김현지", "박정연"] },
+      { name: "아쟁", en: "Ajaeng", icon: "horizontal_rule", leader: "신재희", members: ["서진솔", "설용환", "이예솔"] },
+      { name: "피리", en: "Piri", icon: "straight", leader: "최은희", members: ["강현지", "권구완", "김현빈", "배세아", "심재호", "이수민"] },
+      { name: "타악", en: "Percussion", icon: "radio_button_checked", leader: "김가은", members: ["강예리", "강예서", "사아동", "소유나", "장수빈", "장수윤", "황지은"] },
+      { name: "해금", en: "Haegeum", icon: "music_video", leader: "이예원", members: ["김서연", "김의랑", "김주은", "류혜윤", "문가온", "백지민", "성지영", "심예림", "양수지", "이유민", "이지현", "이희원", "장이재", "장진형", "전희린"] }
     ];
 
     const news = {
@@ -40,6 +40,52 @@ const clubs = [
       toast.classList.add("show");
       clearTimeout(showToast.timer);
       showToast.timer = setTimeout(() => toast.classList.remove("show"), 2800);
+    }
+
+    // A continuous three-second press reveals the original logo for this visit.
+    const heroLogo = $("#heroLogo");
+    if (heroLogo) {
+      let holdTimer = null;
+      let activeInput = null;
+      let legacyShown = false;
+      function cancelLogoHold() {
+        clearTimeout(holdTimer);
+        holdTimer = null;
+        activeInput = null;
+      }
+      function startLogoHold(input) {
+        if (legacyShown || activeInput !== null) return;
+        activeInput = input;
+        holdTimer = setTimeout(() => {
+          cancelLogoHold();
+          legacyShown = true;
+          $("img", heroLogo).src = imagePath("sgu_logo.png");
+          $("img", heroLogo).alt = "서울국악동아리연합 이전 로고";
+          heroLogo.setAttribute("aria-label", "서울국악동아리연합 이전 로고");
+        }, 3000);
+      }
+      heroLogo.addEventListener("pointerdown", event => {
+        if (event.button === 0 && event.isPrimary) startLogoHold(event.pointerId);
+      });
+      heroLogo.addEventListener("pointerleave", cancelLogoHold);
+      heroLogo.addEventListener("pointermove", event => {
+        const rect = heroLogo.getBoundingClientRect();
+        if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) cancelLogoHold();
+      });
+      window.addEventListener("pointerup", cancelLogoHold);
+      window.addEventListener("pointercancel", cancelLogoHold);
+      heroLogo.addEventListener("contextmenu", event => event.preventDefault());
+      heroLogo.addEventListener("keydown", event => {
+        if (event.key !== " " && event.key !== "Enter") return;
+        event.preventDefault();
+        if (!event.repeat) startLogoHold(event.key);
+      });
+      heroLogo.addEventListener("keyup", event => {
+        if (event.key === activeInput) cancelLogoHold();
+      });
+      heroLogo.addEventListener("blur", cancelLogoHold);
+      window.addEventListener("blur", cancelLogoHold);
+      document.addEventListener("visibilitychange", () => { if (document.hidden) cancelLogoHold(); });
     }
 
     function closeMobile() {
