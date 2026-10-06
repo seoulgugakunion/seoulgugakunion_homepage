@@ -13,13 +13,13 @@ const clubs = [
     ];
 
     const parts = [
-      { name: "가야금", en: "Gayageum", icon: "music_note", leader: "김유진", members: ["최다영 (부수석)", "김나우", "김하린", "배이서", "원예주"] },
+      { name: "가야금", en: "Gayageum", icon: "music_note", leader: "김유진", members: ["최다영 (부수석)", "김나우", "김하린", "배이서"] },
       { name: "거문고", en: "Geomungo", icon: "graphic_eq", leader: "최정우", members: ["구동현 (부수석)", "김나현", "김수정", "김채윤", "김태영", "이유정"] },
       { name: "대금", en: "Daegeum", icon: "waves", leader: "최규진", members: ["남기태 (부수석)", "신하진 (부수석)", "강다율", "권하람", "김규림", "김동현", "김현지", "박정연"] },
       { name: "아쟁", en: "Ajaeng", icon: "horizontal_rule", leader: "신재희", members: ["서진솔", "설용환", "이예솔"] },
       { name: "피리", en: "Piri", icon: "straight", leader: "최은희", members: ["강현지", "권구완", "김현빈", "배세아", "심재호", "이수민"] },
-      { name: "타악", en: "Percussion", icon: "radio_button_checked", leader: "김가은", members: ["강예리", "강예서", "사아동", "소유나", "장수빈", "장수윤", "황지은"] },
-      { name: "해금", en: "Haegeum", icon: "music_video", leader: "이예원", members: ["김서연", "김의랑", "김주은", "류혜윤", "문가온", "백지민", "성지영", "심예림", "양수지", "이유민", "이지현", "이희원", "장이재", "장진형", "전희린"] }
+      { name: "타악", en: "Percussion", icon: "radio_button_checked", leader: "김가은", members: ["강예서", "소유나", "장수빈", "장수윤", "황지은"] },
+      { name: "해금", en: "Haegeum", icon: "music_video", leader: "이예원", members: ["김서연", "김의랑", "류혜윤", "문가온", "백지민", "성지영", "심예림", "이유민", "이지현", "장이재", "장진형", "전희린"] }
     ];
 
     const news = {
