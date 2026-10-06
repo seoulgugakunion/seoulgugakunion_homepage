@@ -785,7 +785,7 @@
     /* Renewal identity: monochrome marks with S / G / U accent colors. */
     :root { --rose: #d08888; --leaf: #9bd088; --yellow: #d0cb88; }
     .nav > .brand { display: block; flex-shrink: 0; line-height: 0; }
-    .brand-logo { width: clamp(190px, 23vw, 256px); height: auto; }
+    .brand-logo { width: auto; height: clamp(37px, 4.49vw, 50px); }
     .logo-mark { cursor: default; -webkit-tap-highlight-color: transparent; }
     .logo-mark img { pointer-events: none; }
     .logo-mark:focus-visible, a:focus-visible, button:focus-visible { outline: 3px solid var(--green); outline-offset: 5px; }
